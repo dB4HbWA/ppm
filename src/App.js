@@ -9,8 +9,8 @@ import {
   withRouter // a higher order component
 } from 'react-router-dom'
 import HomeView from './HomeView'
-// import MineView from './MineView'
-// import BuyView from './BuyView'
+import ProductsView from './ProductsView'
+import EditView from './EditView'
 // import SellView from './SellView'
 // import LedgerView from './LedgerView'
 // import TransactionView from './TransactionView'
@@ -48,9 +48,9 @@ class App extends Component {
           <ButtonGroup />
           <Switch>
             <Route path="/home" component={HomeView} />
-            {/* <Route path="/products" component={ProductsView} />
-            <Route path="/products/new" component={NewProductView} />
-            <Route path="/products/edit/:id" component={EditView} /> */}
+            <Route path="/products" component={ProductsView} />
+            {/* <Route path="/products/new" component={NewProductView} /> */}
+            <Route path="/products/edit/:id" component={EditView} />
         </Switch>
         </div>
       </Router>
