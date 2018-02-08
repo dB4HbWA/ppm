@@ -11,14 +11,14 @@ import {
 import HomeView from './HomeView'
 import ProductsView from './ProductsView'
 import EditView from './EditView'
-// import SellView from './SellView'
-// import LedgerView from './LedgerView'
-// import TransactionView from './TransactionView'
+import NewProductView from './NewProductView'
+ 
 
 const NmTab = (props) => {
   return (
     
     <Route exact={props.exact} path={props.to} children={({match}) => {
+      console.log(props);
       return (
         <li className={`tab-title ${match ? 'active' : ''}`} >
           <Link to={props.to}>{props.tabName}</Link>
@@ -35,7 +35,7 @@ const ButtonGroup = props => (
       {/* calling NmTab to generate the Route, circumvents NM styling and Anchor tags */}
       <NmTab to={"/home"} tabName="Home" />
       <NmTab exact={true} to={"/products"} tabName="Product List" />
-      <NmTab to={"/products/new"} tabName="Product Creation" />
+      <NmTab exact={true} to={"/products/new"} tabName="Product Creation" />
     </ul>
   </nav>
 )
@@ -48,8 +48,8 @@ class App extends Component {
           <ButtonGroup />
           <Switch>
             <Route path="/home" component={HomeView} />
-            <Route path="/products" component={ProductsView} />
-            {/* <Route path="/products/new" component={NewProductView} /> */}
+            <Route exact path="/products" component={ProductsView} />
+            <Route path="/products/new" component={NewProductView} />
             <Route path="/products/edit/:id" component={EditView} />
         </Switch>
         </div>
