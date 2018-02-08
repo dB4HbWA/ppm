@@ -1,0 +1,8 @@
+export const BUY_SHINTO_COINS =  "_BUY_SHINTO_COINS";
+export const SELL_SHINTO_COINS =  "_SELL_SHINTO_COINS";
+export const MINE_SHINTO_COINS =  "_MINE_SHINTO_COINS";
+ 
+ 
+
+ 
+
