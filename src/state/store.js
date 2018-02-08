@@ -1,13 +1,16 @@
-import { createStore, compose } from 'redux';
-
+import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from './reducer';
- 
+import thunk from 'redux-thunk'
 
-const store = createStore(
-    reducer,
-    compose(
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
-  );
-  
-export default store;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export default createStore(
+   reducer,
+   composeEnhancers(
+     applyMiddleware(thunk.withExtraArgument('https://5a7c8d464c1e2d00124a5e11.mockapi.io/products')),
+   )
+)
+
+
+
+

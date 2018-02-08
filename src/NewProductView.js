@@ -5,7 +5,7 @@ class NewProductView extends Component {
   render() {
     return (
       <div className="newProductView">
-        <h1>Create a New Product</h1>s
+        <h1>Create a New Product</h1>
          <div>
              <div>Tite<input/></div>
              <div>Price<input/></div>
