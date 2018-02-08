@@ -4,3 +4,15 @@
 .NavBar {
   padding-bottom: 30px;
 }
+
+.cardButton {
+  width: 100%
+}
+
+.cardButtonContainer {
+  width: 100%
+}
+
+.newProductCard {
+  width: 600px;
+}
