@@ -1,25 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadProducts } from "./state/action";
+import { loadProducts, deleteProduct } from "./state/action";
 import { Redirect } from 'react-router-dom'
 
-const ProductCard = ({ product }) => {
+const ProductCard = (props) => {
 
   function clickedEdit(id) {
-    console.log("/products/edit/" + product.id);
-    <Redirect to={"/products/edit/" + product.id} />
+    console.log("/products/edit/" + props.product.id);
+    <Redirect to={"/products/edit/" + props.product.id} />
+  }
+
+  function clickedDelete(id) {
+    console.log("inclickeddelete")
+    props.deleteProduct(id)
+    //<Redirect to={"/products/edit/" + product.id} />
+
   }
 
   return (
     <div className="productCard" >
-      <img src={product.imageUrl ? product.imageUrl : "https://blog.sqlauthority.com/i/a/errorstop.png"} alt="img" height="300" width="300" />
-      <div>{product.title}</div>
-      <div>${product.price}</div>
-      <div className="cardButtonContainer"><button onClick={() => (clickedEdit(product.id)) } className="cardButton warning">Edit</button></div>
-      <div className="cardButtonContainer"><button className="cardButton alert">Delete</button></div>
+      <img src={props.product.imageUrl ? props.product.imageUrl : "https://blog.sqlauthority.com/i/a/errorstop.png"} alt="img" height="300" width="300" />
+      <div>{props.product.title}</div>
+      <div>${props.product.price}</div>
+      <div className="cardButtonContainer"><button onClick={() => (clickedEdit(props.product.id)) } className="cardButton warning">Edit</button></div>
+      <div className="cardButtonContainer"><button onClick={() => (clickedDelete(props.product.id)) } className="cardButton alert">Delete</button></div>
     </div>
   )
 }
+
+const mapDispatchToCard = dispatch => {
+  return {
+    deleteProduct: (productId) => dispatch(
+      deleteProduct(productId)
+    )
+  }
+};
+
+const ProductCardWrapped = connect(null, mapDispatchToCard)(ProductCard);
 
 class ProductsView extends Component {
   componentDidMount() {
@@ -36,7 +53,7 @@ class ProductsView extends Component {
               {this.props.products.map((product) => (
                 <div key={product.id} className="small-6 medium-6 large-6 xlarge-6 columns">
                   <div className="card">
-                    <ProductCard product={product} />
+                    <ProductCardWrapped product={product} />
                   </div>
                 </div>
               ))}

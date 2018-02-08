@@ -5,7 +5,6 @@ export const ADD_PRODUCT = "_ADD_PRODUCT";
 export const DELETE_PRODUCT = "_DELETE_PRODUCT";
 export const UPDATE_PRODUCT = "_UPDATE_PRODUCT";
 
-
 function loadProducts() {
     return (dispatch, getState, api) => {
         dispatch({ type: REQUEST_PRODUCTS })
@@ -35,4 +34,18 @@ function createNewProduct(product) {
     }
 }
 
-export { loadProducts, createNewProduct }
+function deleteProduct(productId) {
+    console.log("in delete product")
+    return (dispatch, getState, api) => {
+
+        axios.delete(api + "/" + productId)
+            .then((response) => {
+                dispatch(
+                    loadProducts()
+                  )
+            }
+            )
+    }
+}
+
+export { loadProducts, createNewProduct, deleteProduct }
