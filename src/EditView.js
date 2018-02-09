@@ -4,16 +4,18 @@ import { connect } from "react-redux";
 class EditView extends Component {
   constructor(props) {
     super(props);
+    const product = this.props.products.find((product) => product.id == this.props.match.params.id)
     this.state = {
-      title: "",
-      price: "",
-      imgUrl: "",
+      title: product.title,
+      price: product.price,
+      imgUrl: product.imageUrl,
       titleMsg: "",
-      btnDisabled: true
+      btnDisabled: false
     }
 
     this.handleChange = this.handleChange.bind(this);
   }
+
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value })
@@ -54,6 +56,7 @@ class EditView extends Component {
 
 
   render() {
+
     return (
       <div className="newProductView">
         <h1>Edit Product</h1>
@@ -65,9 +68,9 @@ class EditView extends Component {
               </div>
             </div>
             <div className="small-6 medium-6 large-6 xlarge-6 columns">
-              <input name="title" onChange={this.handleChange} value={this.props.title} type="text" />
+              <input name="title" onChange={this.handleChange} value={this.state.title} type="text" />
             </div>
-            <small class="error text-right">{this.state.titleMsg}</small>
+            <small className="error text-right">{this.state.titleMsg}</small>
           </div>
           <div className="row">
             <div className="small-6 medium-6 large-6 xlarge-6 columns">
@@ -76,7 +79,7 @@ class EditView extends Component {
               </div>
             </div>
             <div className="small-6 medium-6 large-6 xlarge-6 columns">
-              <input name="price" onChange={this.handleChange} value={this.props.price} type="text" />
+              <input name="price" onChange={this.handleChange} value={this.state.price} type="text" />
             </div>
             <small className="error text-right">{this.state.priceMsg}</small>
           </div>
@@ -87,7 +90,7 @@ class EditView extends Component {
               </div>
             </div>
             <div className="small-6 medium-6 large-6 xlarge-6 columns">
-              <input name="imgUrl" onChange={this.handleChange} value={this.props.imgUrl} type="text" />
+              <input name="imgUrl" onChange={this.handleChange} value={this.state.imgUrl} type="text" />
             </div>
           </div>
           <div>
@@ -100,19 +103,18 @@ class EditView extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    value: state.value
-  };
-};
+    products: state.products
+  }
+}
 
 // const mapDispatchToProps = dispatch => {
 //   return {
-//     mineCoin(answer) {
+//     editProduct(answer) {
 //       if (answer == 8) dispatch({ type: MINE_SHINTO_COINS });
 //     }
 //   };
 // };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ProductsView);
-export default EditView;
+export default connect(mapStateToProps, null)(EditView);

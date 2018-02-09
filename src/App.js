@@ -52,8 +52,6 @@ class App extends Component {
             <Route exact path="/products" component={ProductsView} />
             <Route path="/products/new" component={NewProductView} />
             <Route path="/products/edit/:id" component={EditView} />
-            <Route path="/products/edit/" component={EditView} />
-
         </Switch>
         </div>
       </Router>

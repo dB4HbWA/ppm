@@ -7,7 +7,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export default createStore(
    reducer,
    composeEnhancers(
-     applyMiddleware(thunk.withExtraArgument('https://5a7c8d464c1e2d00124a5e11.mockapi.io/products')),
+     applyMiddleware(thunk.withExtraArgument('http://5a7c8d464c1e2d00124a5e11.mockapi.io/products')),
    )
 )
 
