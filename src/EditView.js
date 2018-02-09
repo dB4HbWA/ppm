@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { editProduct, deleteProduct } from "./state/action";
 
 class EditView extends Component {
   constructor(props) {
@@ -23,11 +24,10 @@ class EditView extends Component {
     //validate title
     if (event.target.name === "title") {
       if (event.target.value.length < 4) {
-        this.state.titleMsg = "Title must be at least 4 characters"
-        this.state.btnDisabled = true
+        this.setState({titleMsg: "Title must be at least 4 characters", btnDisabled: true})
       }
       else {
-        this.state.titleMsg = ""
+        this.setState({titleMsg: ""})
       }
     }
     // validate price
@@ -35,19 +35,17 @@ class EditView extends Component {
 
 
       if (event.target.name === "") {
-        this.state.priceMsg = "Please enter a valid price"
-        this.state.btnDisabled = true
+        this.setState({priceMsg: "Please enter a valid price", btnDisabled: true})
       } else if (isNaN(parseInt(this.state.price, 10))) {
-        this.state.priceMsg = "Price must be numeric"
-        this.state.btnDisabled = true
+        this.setState({priceMsg: "Price must be numeric", btnDisabled: true})
       }
       else {
-        this.state.priceMsg = ""
+        this.setState({priceMsg: ""})
       }
 
     }
     if (this.state.title.length > 0 && this.state.titleMsg === "" && this.state.priceMsg === "") {
-      this.state.btnDisabled = false
+      this.setState({btnDisabled:false})
     }
   }
 
@@ -94,8 +92,8 @@ class EditView extends Component {
             </div>
           </div>
           <div>
-            <button className="btn-cta alert" style={{ margin: '10px' }}>Delete</button>
-            <button className="btn-cta info" disabled={this.state.btnDisabled} style={{ margin: '10px' }}>Update</button>
+            <button className="btn-cta alert" style={{ margin: '10px' }} onClick={() => this.props.deleteProduct(this.props.match.params.id)} >Delete</button>
+            <button className="btn-cta info" disabled={this.state.btnDisabled}  onClick={() => this.props.editProduct(this.props.match.params.id, {title: this.state.title, imageUrl: this.state.imgUrl, price: this.state.price})} style={{ margin: '10px' }}>Update</button>
           </div>
         </div>
       </div>
@@ -109,12 +107,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     editProduct(answer) {
-//       if (answer == 8) dispatch({ type: MINE_SHINTO_COINS });
-//     }
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    editProduct: (productId, productObj) => dispatch(
+      editProduct(productId, productObj)
+    ),
+    deleteProduct: (productId) => dispatch(
+      deleteProduct(productId)
+    )
+  };
+};
 
-export default connect(mapStateToProps, null)(EditView);
+export default connect(mapStateToProps, mapDispatchToProps)(EditView);

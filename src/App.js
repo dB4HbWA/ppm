@@ -5,8 +5,7 @@ import {
   Router,
   Route,
   Link,
-  Switch,
-  withRouter // a higher order component
+  Switch
 } from 'react-router-dom'
 import HomeView from './HomeView'
 import ProductsView from './ProductsView'
@@ -19,7 +18,6 @@ const NmTab = (props) => {
   return (
     
     <Route exact={props.exact} path={props.to} children={({match}) => {
-      console.log(props);
       return (
         <li className={`tab-title ${match ? 'active' : ''}`} >
           <Link to={props.to}>{props.tabName}</Link>

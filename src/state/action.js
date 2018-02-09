@@ -12,7 +12,6 @@ function loadProducts() {
         dispatch({ type: REQUEST_PRODUCTS })
         axios.get(api)
             .then(({ data: products }) => {
-                console.log(products);
                 dispatch({ type: RECEIVED_PRODUCTS, payload: products })
                 history.push("/products/");
             })
@@ -31,24 +30,35 @@ function createNewProduct(product) {
             .then((response) => {
                 dispatch(
                     loadProducts()
-                  )
+                )
             }
             )
     }
 }
 
 function deleteProduct(productId) {
-    console.log("in delete product")
     return (dispatch, getState, api) => {
 
         axios.delete(api + "/" + productId)
             .then((response) => {
                 dispatch(
                     loadProducts()
-                  )
+                )
             }
             )
     }
 }
 
-export { loadProducts, createNewProduct, deleteProduct }
+function editProduct(productId, productObj) {
+    return (dispatch, getState, api) => {
+        axios.put(api + "/" + productId, productObj)
+            .then((response) => {
+                dispatch(
+                    loadProducts()
+                )
+            }
+            )
+    }
+}
+
+export { loadProducts, createNewProduct, deleteProduct, editProduct }
