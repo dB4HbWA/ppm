@@ -1,4 +1,6 @@
 import axios from "axios"
+import history from '../history'
+
 export const REQUEST_PRODUCTS = "_REQUEST_PRODUCTS";
 export const RECEIVED_PRODUCTS = "_RECEIVED_PRODUCTS";
 export const ADD_PRODUCT = "_ADD_PRODUCT";
@@ -12,6 +14,7 @@ function loadProducts() {
             .then(({ data: products }) => {
                 console.log(products);
                 dispatch({ type: RECEIVED_PRODUCTS, payload: products })
+                history.push("/products/");
             })
     }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './ui-toolkit/css/nm-cx/main.css';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Link,
   Switch,
@@ -12,6 +12,7 @@ import HomeView from './HomeView'
 import ProductsView from './ProductsView'
 import EditView from './EditView'
 import NewProductView from './NewProductView'
+import history from './history'
  
 
 const NmTab = (props) => {
@@ -43,7 +44,7 @@ const ButtonGroup = props => (
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <ButtonGroup />
           <Switch>

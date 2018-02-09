@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadProducts, deleteProduct } from "./state/action";
 import { Redirect } from 'react-router-dom'
+import history from './history'
 
 const ProductCard = (props) => {
 
   function clickedEdit(id) {
-    console.log("/products/edit/" + props.product.id);
-    <Redirect to={"/products/edit/" + props.product.id} />
+    history.push("/products/edit/" + props.product.id);
   }
 
   function clickedDelete(id) {
