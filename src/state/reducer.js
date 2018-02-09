@@ -1,4 +1,4 @@
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
 import { RECEIVED_PRODUCTS, ADD_PRODUCT, DELETE_PRODUCT, REQUEST_PRODUCTS, UPDATE_PRODUCT } from './action';
 
 const initialState = {
